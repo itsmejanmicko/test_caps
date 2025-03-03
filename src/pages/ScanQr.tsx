@@ -25,19 +25,20 @@ const ScanQr = () => {
             if (result) {
                 setScanning(true);
                 const scannedText = result.getText().trim();
+                console.log("scann", scannedText);
 
                 // Extract studentId using regex
-                const studentIdMatch = scannedText.match(/"studentId"\s*:\s*"(\d{4}-\d{6})"/);
+                const studentIdMatch = scannedText.match(/"studentId"\s*:\s*"(\d{4}-\d{5,6})"/);
+                console.log(studentIdMatch)
                 const extractedStudentId = studentIdMatch ? studentIdMatch[1] : null;
+
 
                 if (extractedStudentId) {
                     console.log("Extracted Student ID:", extractedStudentId);
-
                     const user = mockUser.find((user) => user.studentId.trim() === extractedStudentId);
-
                     if (user) {
                         console.log("User exists:", user);
-                        navigate("/image", { state: { user } }); 
+                        navigate("/image", { state: { user } });
                     } else {
                         setResult({
                             message: "User not found",
