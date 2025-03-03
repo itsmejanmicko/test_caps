@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { BrowserMultiFormatReader, IScannerControls } from "@zxing/browser";
 import { useNavigate } from "react-router-dom";
-import { mockUser } from "@/database/MockUser";
+import { mockUser } from "@/database/mockUser";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -37,7 +37,7 @@ const ScanQr = () => {
 
                     if (user) {
                         console.log("User exists:", user);
-                        navigate("/image", { state: { user } }); // Redirect to Image page
+                        navigate("/image", { state: { user } }); 
                     } else {
                         setResult({
                             message: "User not found",
@@ -46,6 +46,7 @@ const ScanQr = () => {
                     }
                 } else {
                     setResult({ message: "Invalid QR Code format" });
+                    console.log(err)
                 }
                 setScanning(false);
             }
